@@ -1,0 +1,85 @@
+<?php 
+   if(count($_SERVER['argv']) >= 3) {
+      $action = $_SERVER['argv'][1];
+      $filePath = $_SERVER['argv'][2];
+      $namespace = "";
+      $folderPath = "";
+      if(preg_match('~/~', $filePath)) {
+         $filePathArr = explode('/', $filePath);
+         $fileName = ucfirst(end($filePathArr));
+         unset($filePathArr[count($filePathArr) - 1]);
+
+         foreach($filePathArr as $item) {
+            $namespace.="\\".ucfirst($item);
+            $folderPath = "$item/";
+         }
+      } else {
+         $fileName = ucfirst($filePath);
+      }
+
+      switch($action) {
+         case "make::controller":
+            $folderPath = "app/controllers/".trim($folderPath, '/');
+            
+            make($folderPath, $namespace, $fileName, 'Controller', 'controller.tpl');
+            break;
+         case "delete::controller":
+            $folderPath = "app/controllers/".trim($folderPath, '/');
+            deleteFile($folderPath, $fileName, "Controller");
+            break;
+         case "make::model":
+            $folderPath = "app/models/".trim($folderPath, '/');
+            make($folderPath, $namespace, $fileName, 'Model', 'model.tpl');
+            break;
+         case "delete::model":
+            $folderPath = "app/models/".trim($folderPath, '/');
+            deleteFile($folderPath, $fileName, "Model");
+            break;
+         case "make::middleware":
+            $folderPath = "app/middlewares/".trim($folderPath, '/');
+            make($folderPath, $namespace, $fileName, 'Middleware','middleware.tpl');
+            break;
+         case "delete::middleware":
+            $folderPath = "app/middlewares/".trim($folderPath, '/');
+            deleteFile($folderPath, $fileName, "Middleware");
+            break;
+         default:
+            echo "\033[31mAction $action chưa được thiết lập hoặc sai. Vui lòng kiểm tra lại \033[0m\n";
+      }
+   }
+
+
+   function make($folderPath, $namespace, $fileName, $type, $template) {
+      $folderPath = trim($folderPath, '/');
+      $path = "$folderPath/$fileName.php";
+      if(file_exists($path)) {
+         echo "\033[31m$type $fileName đã tồn tại. Không thể tạo \033[0m\n";
+      } else {
+         $pathTemplate = "core/console/$template";
+         if(file_exists($pathTemplate)) {
+            $content = file_get_contents($pathTemplate);
+            $content = str_replace('{{$namespace}}', $namespace, $content);
+            $content = str_replace('{{$fileName}}', $fileName, $content);
+            if(is_dir($folderPath)) {
+               file_put_contents($path, $content);
+               echo "\033[32mTạo $type $fileName thành công \033[0m\n";
+            } else {
+               echo "\033[31mĐường dẫn thư mục $folderPath sai hoặc không tồn tại. Vui lòng kiểm tra lại \033[0m\n";
+            }
+         } else {
+            echo "\033[31mTemplate $template sai hoặc không tồn tại. Vui lòng kiểm tra lại \033[0m\n";
+         }
+      }
+   }
+
+   function deleteFile($folderPath, $fileName, $type) {
+      $folderPath = trim($folderPath, '/');
+      $path = "$folderPath/$fileName.php";
+      if(file_exists($path)) {
+         unlink($path);
+         echo "\033[32mXóa $type $fileName thành công \033[0m\n";
+      } else {
+         echo "\033[31m$type $fileName không tồn tại. Không thể xóa \033[0m\n";
+      }
+   }
+?>

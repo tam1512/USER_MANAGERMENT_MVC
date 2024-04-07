@@ -2,5 +2,7 @@
 $routes['default_controller'] = 'home';
 
 $routes['trang-chu'] = 'home';
-$routes['san-pham'] = 'product';
-$routes['san-pham/(.+)'] = 'product/detail/$1';
+$routes['nguoi-dung'] = 'user';
+$routes['nguoi-dung/xoa'] = 'user/deletes';
+$routes['nguoi-dung/them-nguoi-dung'] = 'user/add';
+// $routes['san-pham/(.+)'] = 'product/detail/$1';

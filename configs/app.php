@@ -8,12 +8,14 @@ $config['app'] = [
       htmlHelper::class
    ],
    'routeMiddleware' => [
-      'san-pham' => AuthMiddleware::class
+      // 'san-pham' => AuthMiddleware::class
    ],
    'globalMiddleware' => [
-      ParamsMiddleware::class
+      // ParamsMiddleware::class
    ],
    'boot' => [
       AppServiceProvider::class
-   ]
+   ],
+   'userOnPage' => 6,
+   'limitPage' => 4
    ];

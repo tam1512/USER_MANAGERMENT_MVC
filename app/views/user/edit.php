@@ -3,17 +3,17 @@
    <h1>{{$title}}</h1>
    <hr>
    @php
-   htmlHelper::openForm('post', _WEB_HOST_ROOT.'/user/handleAdd');
+   htmlHelper::openForm('post', _WEB_HOST_ROOT.'/user/handleEdit/'.$user['id']);
    @endphp
    <div class="row">
       <div class="col-6">
          @php
-         htmlHelper::input('<div class="form-group"><label for="fullname">Họ tên</label>', form_error('fullname', '<span class="text-danger">', '</span>').'</div>', 'text', 'fullname', old('fullname'), 'form-control', 'fullname', 'Họ tên...');
+         htmlHelper::input('<div class="form-group"><label for="fullname">Họ tên</label>', form_error('fullname', '<span class="text-danger">', '</span>').'</div>', 'text', 'fullname', old('fullname', $user['fullname']), 'form-control', 'fullname', 'Họ tên...');
          @endphp
       </div>
       <div class="col-6">
          @php
-         htmlHelper::input('<div class="form-group"><label for="email">Email</label>', form_error('email', '<span class="text-danger">', '</span>').'</div>', 'text', 'email', old('email'), 'form-control', 'email', 'Email...');
+         htmlHelper::input('<div class="form-group"><label for="email">Email</label>', form_error('email', '<span class="text-danger">', '</span>').'</div>', 'text', 'email', old('email', $user['email']), 'form-control', 'email', 'Email...');
          @endphp
       </div>
       <div class="col-6">
@@ -30,8 +30,8 @@
          <div class="form-group">
             <label for="status">Trạng thái</label>
             <select name="status" id="status" class="form-control">
-               <option value="1">Kích hoạt</option>
-               <option value="0">Chưa kích hoạt</option>
+               <option value="1" {{ $user['status'] == 1 ? 'selected' : false}}>Kích hoạt</option>
+               <option value="0" {{ $user['status'] == 0 ? 'selected' : false}}>Chưa kích hoạt</option>
             </select>
          </div>
       </div>
@@ -42,7 +42,7 @@
                <option value="0">Chọn nhóm</option>
                @if(!empty($listGroups))
                   @foreach($listGroups as $group)
-                     <option value="{{$group['id']}}" {{$group['id'] == old('group_id') ? 'selected' : false}}>{{$group['name']}}</option>
+                     <option value="{{$group['id']}}" {{$group['id'] == old('group_id', $user['group_id']) ? 'selected' : false}}>{{$group['name']}}</option>
                   @endforeach
                @endif
             </select>

@@ -6,7 +6,6 @@ $request = new Request();
    <h1>{{$title}}</h1>
    <hr>
    <div class="row mb-3">
-      {!(!empty($message) && !empty($msg_type)) ? '<div class="col-12 form-group alert alert-'.$msg_type.'">'.$message.'</div>' : false !}
       <div class="col-12 mb-3">
          <a href="{{_WEB_HOST_ROOT.'/nguoi-dung/them-nguoi-dung'}}" class="btn btn-success"><i class="fa-regular fa-square-plus mr-2"></i>Thêm người dùng</a>
       </div>
@@ -63,8 +62,8 @@ $request = new Request();
                   <td>{{$user['nameGroup']}}</td>
                   <td>{!$user['status'] == 1 ? '<p class="badge badge-success">Kích hoạt</p>' : '<p class="badge badge-danger">Chưa kích hoạt</p>'!}</td>
                   <td>{{getDateFormat($user['created_at'], 'd/m/Y')}}<br>{{getDateFormat($user['created_at'], 'h:i:s')}}</td>
-                  <td><a href="#" class="btn btn-warning"><i class="fa-solid fa-pen-to-square"></i></a></td>
-                  <td><a href="#" class="btn btn-danger"><i class="fa-solid fa-trash"></i></a></td>
+                  <td><a href="{{_WEB_HOST_ROOT.'/nguoi-dung/chinh-sua/'.$user['id']}}" class="btn btn-warning"><i class="fa-solid fa-pen-to-square"></i></a></td>
+                  <td><a href="{{_WEB_HOST_ROOT.'/nguoi-dung/xoa-nguoi-dung/'.$user['id']}}" class="btn btn-danger"><i class="fa-solid fa-trash"></i></a></td>
                </tr>
             @endforeach
          @else

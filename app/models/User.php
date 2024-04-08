@@ -42,4 +42,19 @@ class User extends Model {
    public function addUser($data) {
       return $this->db->table($this->tableFill())->insert($data);
    }
+
+   public function getUser($value, $field='id') {
+      return $this->db->table($this->tableFill())->where($field, '=', $value)->first();
+   }
+   public function getUserByEmail($email) {
+      return $this->db->table($this->tableFill())->where('email', '=', $email)->first();
+   }
+
+   public function updateUser($data, $id) {
+      return $this->db->table($this->tableFill())->where('id', '=', $id)->update($data);
+   }
+
+   public function getLastUserId() {
+      return $this->db->lastId();
+   }
 }

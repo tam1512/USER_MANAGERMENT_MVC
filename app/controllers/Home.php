@@ -14,7 +14,7 @@ class Home extends Controller {
          'footer_content' => [
             'copyright' => 'Copyright &copy; 2024 by Unicode Academy'
          ],
-         'content' => 'user/index',
+         'content' => 'home/index',
          'sub_content' => [
             'title' => 'Trang chủ'
          ]

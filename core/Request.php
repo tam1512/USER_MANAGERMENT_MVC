@@ -140,7 +140,6 @@ class Request {
                      $controller = App::$app->getCurrentController();
                      if(method_exists($controller, $methodName)) {
                         $status = call_user_func_array([$controller, $methodName], [$dataFields[$fieldName]]);
-
                         if(!$status) {
                            $this->setError($fieldName, $ruleName);
                            $isValidate = false;
@@ -161,7 +160,7 @@ class Request {
    }
 
    public function error($fieldName = "") {
-      if(empty($fieldName)) {
+      if(empty($fieldName) && !empty($this->__errors)) {
          $errorsArr = [];
          foreach($this->__errors as $key => $error) {
             $errorsArr[$key] = reset($error);

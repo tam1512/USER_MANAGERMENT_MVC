@@ -66,4 +66,8 @@ class Session {
       }
       return false;
    }
+
+   static public function id() {
+      return session_id();
+   }
 }

@@ -131,13 +131,33 @@ class App {
          foreach($routeMiddlewares as $key => $middleware) {
             $className = getNameClass($middleware);
             $path = 'app/middlewares/'.$className.'.php';
-            if($key == $routeKey && file_exists($path)) {
-               $middlewareObject = new $middleware();
-               if(!empty($this->__db)) {
-                  $middlewareObject->db = $this->__db;
+            if(file_exists($path)) {
+               if(!preg_match('~/\*~', $key)) {
+                  if($key == $routeKey) {
+                     $middlewareObject = new $middleware();
+                     if(!empty($this->__db)) {
+                        $middlewareObject->db = $this->__db;
+                     }
+                     $middlewareObject->handle();
+                  }
+               } else {
+                  if($key != '/*') {
+                     $key = preg_replace('~(.+)/*~', '$1', $key);
+                     if(preg_match('~'.$key.'~', $routeKey)) {
+                        $middlewareObject = new $middleware();
+                        if(!empty($this->__db)) {
+                           $middlewareObject->db = $this->__db;
+                        }
+                        $middlewareObject->handle();
+                     }
+                  } else {
+                     $middlewareObject = new $middleware();
+                     if(!empty($this->__db)) {
+                        $middlewareObject->db = $this->__db;
+                     }
+                     $middlewareObject->handle();
+                  }
                }
-               $middlewareObject->handle();
-               break;
             }
          }
       }

@@ -95,6 +95,15 @@ require_once('core/Model.php');
 //load core template
 require_once('core/Template.php');
 
+
+//load core mailer
+require_once('core/mailer/Exception.php');
+require_once('core/mailer/PHPMailer.php');
+require_once('core/mailer/SMTP.php');
+
+//load core Mail
+require_once('core/Mail.php');
+
 //load core controller
 require_once('core/Controller.php');
 

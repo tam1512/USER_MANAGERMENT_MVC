@@ -1,7 +1,7 @@
 <?php 
 namespace App\Core;
 class Routes {
-   private $__routeKey;
+   private $__routeKey = "/";
    public function handleRoutes($url) {
       global $routes;
       unset($routes['default_controller']);
@@ -11,6 +11,7 @@ class Routes {
             if(preg_match('~^'.$key.'$~is', $urlHandle)) {
                $urlHandle = preg_replace('~^'.$key.'$~is', $value, $urlHandle);
                $this->__routeKey = $key;
+               break;
             }
          }
       }

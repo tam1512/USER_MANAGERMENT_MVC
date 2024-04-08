@@ -104,7 +104,6 @@ trait QueryBuilder {
       if(filter_var($page, FILTER_VALIDATE_INT)) {
          $offset = ($page - 1) * $limit;
          $data = $this->limit($limit, $offset)->get();
-
          $count = $this->getRows($this->sqlPaginate);
          $this->sqlPaginate = '';
          $numberPage = ceil($count / $limit);

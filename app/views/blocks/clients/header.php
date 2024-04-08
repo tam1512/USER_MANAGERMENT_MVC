@@ -25,7 +25,16 @@
                      <a href="{{_WEB_HOST_ROOT}}/nguoi-dung" class="nav-link">Người dùng</a>
                   </li>
                   <li class="nav-item">
-                     <a href="{{_WEB_HOST_ROOT}}/auth/login" class="nav-link">Đăng nhập</a>
+                     @use(App\Core\Session)
+                     @use(App\Core\View)
+                     @if(empty(Session::data('user_login')))
+                     <a href="{{_WEB_HOST_ROOT}}/dang-nhap" class="nav-link">Đăng nhập</a>
+                     @elseif(View::$dataShare['fullname'])
+                     <a href="{{_WEB_HOST_ROOT}}/dang-xuat" class="nav-link">Đăng xuất</a>
+                  </li>
+                  <li class="nav-item">
+                     <a class="nav-link active">Chào: <b>{!View::$dataShare['fullname']!}</b></a>
+                     @endif
                   </li>
                </ul>
                <form action="">

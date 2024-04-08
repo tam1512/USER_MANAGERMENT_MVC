@@ -71,6 +71,7 @@ class Database {
       
       $sql = "INSERT INTO $table($fieldStr) VALUES ($valueStr);";
       
+      $this->resetQueryBuilder();
       return $this->query($sql, $dataInsert);
    }
 
@@ -86,6 +87,8 @@ class Database {
       } else {
          $sql = "UPDATE $table SET $updateStr WHERE $condition";
       }
+      
+      $this->resetQueryBuilder();
       return $this->query($sql, $dataUpdate);
    }
    function deleteData($table, $condition = '') {
@@ -95,7 +98,7 @@ class Database {
       } else {
          $sql = "DELETE FROM $table WHERE $condition";
       }
-
+      $this->resetQueryBuilder();
       return $this->query($sql);
    }
 

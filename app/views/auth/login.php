@@ -21,6 +21,10 @@
             <div class="text-center">
                <a href="{{_WEB_HOST_ROOT}}/dang-ky">Đăng ký</a>
             </div>
+            <br>
+            <div class="text-center">
+               <a href="{{_WEB_HOST_ROOT}}/quen-mat-khau">Quên mật khẩu</a>
+            </div>
          </div>
       </div>
       @php

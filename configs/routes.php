@@ -12,3 +12,5 @@ $routes['dang-ky'] = 'auth/register';
 $routes['dang-xuat'] = 'auth/logout';
 $routes['kich-hoat-tai-khoan'] = 'auth/active_account';
 $routes['kich-hoat/(.+)'] = 'auth/active/$1';
+$routes['quen-mat-khau'] = 'auth/forgot';
+$routes['dat-lai-mat-khau/(.+)'] = 'auth/reset_password/$1';

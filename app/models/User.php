@@ -50,8 +50,8 @@ class User extends Model {
       return $this->db->table($this->tableFill())->where('email', '=', $email)->first();
    }
 
-   public function updateUser($data, $id) {
-      return $this->db->table($this->tableFill())->where('id', '=', $id)->update($data);
+   public function updateUser($data, $value, $field='id') {
+      return $this->db->table($this->tableFill())->where($field, '=', $value)->update($data);
    }
 
    public function getLastUserId() {

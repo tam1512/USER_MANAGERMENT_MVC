@@ -12,7 +12,9 @@ class AuthMiddleware extends Middlewares {
       'dang-ky',
       'auth/*',
       'kich-hoat-tai-khoan',
-      'kich-hoat/*'
+      'kich-hoat/*',
+      'quen-mat-khau',
+      'dat-lai-mat-khau/*'
      ];
 
      $auth = $this->checkAuth();
